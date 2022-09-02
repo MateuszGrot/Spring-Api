@@ -34,4 +34,8 @@ public class WodApi {
                 .orElseThrow(() -> new NoSuchElementException("Workout with ID = " + id + " not found"));
     }
 
+    @PostMapping
+    public boolean addWod(@RequestBody Workout workout){
+        return workouts.add(workout);
+    }
 }
