@@ -39,6 +39,8 @@ public class WodApi {
         return workouts.add(workout);
     }
 
+
+
     @DeleteMapping(path = "/{id}")
     public boolean deleteWod(@PathVariable("id") Long id) {
 
