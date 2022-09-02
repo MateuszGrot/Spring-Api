@@ -38,4 +38,10 @@ public class WodApi {
     public boolean addWod(@RequestBody Workout workout){
         return workouts.add(workout);
     }
+
+    @DeleteMapping(path = "/{id}")
+    public boolean deleteWod(@PathVariable("id") Long id) {
+
+        return workouts.removeIf(element -> element.getId() == id);
+    }
 }
