@@ -1,5 +1,7 @@
 package pl.mateuszgrot.workoutapp;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -32,8 +34,9 @@ public class WodApi {
     }
 
     @PostMapping
-    public boolean addWod(@RequestBody Workout workout) {
-        return workouts.add(workout);
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public void addWorkout(@RequestBody @Validated CreateWorkoutRequest request) {
+        workouts.add(new Workout(UUID.randomUUID(), request.getName(), request.getDuration()));
     }
 
 

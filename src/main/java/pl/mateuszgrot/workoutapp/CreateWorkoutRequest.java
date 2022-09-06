@@ -1,20 +1,24 @@
 package pl.mateuszgrot.workoutapp;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import java.util.UUID;
+import javax.validation.constraints.NotEmpty;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Setter
 @Getter
-public class Workout {
+@NoArgsConstructor
+@AllArgsConstructor
 
-    private UUID uuid = UUID.randomUUID();
+
+public class CreateWorkoutRequest {
+
+    @NotEmpty
     private String name;
+
+    @NotNull
     private String duration;
 
 }
+
