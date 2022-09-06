@@ -4,6 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -36,7 +38,12 @@ public class WodApi {
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public void addWorkout(@RequestBody @Validated CreateWorkoutRequest request) {
-        workouts.add(new Workout(UUID.randomUUID(), request.getName(), request.getDuration()));
+        workouts.add(new Workout(UUID.randomUUID(),
+                request.getName(),
+                Duration.of(request.getDuration().getAmount(),
+                        ChronoUnit.valueOf(request.getDuration().getUnit()))));
+
+
     }
 
 

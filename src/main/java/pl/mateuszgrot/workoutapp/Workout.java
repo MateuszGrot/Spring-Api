@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.Duration;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -15,6 +16,6 @@ public class Workout {
 
     private UUID uuid = UUID.randomUUID();
     private String name;
-    private String duration;
+    private Duration duration;
 
 }
