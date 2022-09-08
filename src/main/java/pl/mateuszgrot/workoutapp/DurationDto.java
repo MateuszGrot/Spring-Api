@@ -11,7 +11,6 @@ import javax.validation.constraints.NotEmpty;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class DurationDto {
 
     @NotNull
