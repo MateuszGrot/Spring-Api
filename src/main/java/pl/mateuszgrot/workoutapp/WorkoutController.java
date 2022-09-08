@@ -1,5 +1,6 @@
 package pl.mateuszgrot.workoutapp;
 
+import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -22,37 +23,35 @@ public class WorkoutController {
   }
 
   @GetMapping("/")
-  public List<WorkoutResponseDto> getAll() {
-    List<WorkoutResponseDto> workoutResponseDtos  = new ArrayList<>();
-    for (Workout workout : workouts) {
-      WorkoutResponseDto workoutResponseDto = new WorkoutResponseDto(workout.getUuid(),
-          workout.getName(), workout.getDuration());
-      workoutResponseDtos.add(workoutResponseDto);
-    }
-    return workoutResponseDtos;
+  public List<WorkoutResponse> getAll() {
+    return workouts.stream()
+        .map(w -> new WorkoutResponse(w.getId(), w.getName(), w.getDuration()))
+        .collect(Collectors.toList());
   }
 
   @GetMapping(path = "/{id}")
   public Workout getById(@PathVariable("id") UUID id) {
-
     return workouts.stream()
-        .filter(element -> element.getUuid() == id)
+        .filter(element -> element.getId() == id)
         .findFirst()
         .orElseThrow(() -> new NoSuchElementException("Workout with ID = " + id + " not found"));
   }
 
   @PostMapping
   @ResponseStatus(code = HttpStatus.CREATED)
-  public void addWorkout(@RequestBody @Validated CreateWorkoutRequest request) {
-    workouts.add(new Workout(UuidWrapper.getUuid(),
+  public UuidWrapper addWorkout(@RequestBody @Validated CreateWorkoutRequest request) {
+    final UUID id = UUID.randomUUID();
+    workouts.add(new Workout(id,
         request.getName(),
         Duration.of(request.getDuration().getAmount(),
             ChronoUnit.valueOf(request.getDuration().getUnit()))));
+
+    return UuidWrapper.of(id);
   }
 
 
   @DeleteMapping(path = "/{id}")
-  public boolean deleteWod(@PathVariable("id") UUID id) {
-    return workouts.removeIf(element -> element.getUuid() == id);
+  public boolean deleteWorkout(@PathVariable("id") UUID id) {
+    return workouts.removeIf(element -> element.getId() == id);
   }
 }

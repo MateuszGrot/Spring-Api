@@ -14,12 +14,12 @@ import javax.validation.constraints.NotEmpty;
 
 public class CreateWorkoutRequest {
 
-    @NotEmpty
-    private String name;
+  @NotEmpty
+  private String name;
 
-    @NotNull
-    @Valid
-    private DurationDto duration;
+  @NotNull
+  @Valid
+  private DurationDto duration;
 
 
 }

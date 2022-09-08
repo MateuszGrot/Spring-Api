@@ -7,15 +7,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotEmpty;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class DurationDto {
 
-    @NotNull
-    private Long amount;
-    @NotEmpty
-    private String unit;
+  @NotNull
+  private Long amount;
+  @NotEmpty
+  private String unit;
 
 }

@@ -1,21 +1,15 @@
 package pl.mateuszgrot.workoutapp;
 
 import java.util.UUID;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor(staticName = "of")
 public class UuidWrapper {
 
-  public UUID id;
-
-  static String toString(UUID id){
-    return id.toString();
-  }
-
-  static UUID fromString(String id){
-    return UUID.fromString(id);
-  }
-
-  static UUID getUuid(){
-    return UUID.randomUUID();
-  }
+  private UUID id;
 
 }

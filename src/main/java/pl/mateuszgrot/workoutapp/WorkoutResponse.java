@@ -11,9 +11,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
-public class WorkoutResponseDto {
+public class WorkoutResponse {
 
-  private UUID uuid = UUID.randomUUID();
+  private UUID id;
   private String name;
   private Duration duration;
 
