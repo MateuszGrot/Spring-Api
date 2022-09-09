@@ -16,24 +16,30 @@ import java.util.UUID;
 @RequestMapping("/api/workouts")
 public class WorkoutController {
 
+  private final WorkoutResponseMapper mapper;
   private List<Workout> workouts;
 
-  public WorkoutController() {
+  public WorkoutController(
+      final WorkoutResponseMapper mapper
+  ) {
     workouts = new ArrayList<>();
+    this.mapper = mapper;
   }
 
   @GetMapping("/")
   public List<WorkoutResponse> getAll() {
     return workouts.stream()
-        .map(w -> new WorkoutResponse(w.getId(), w.getName(), w.getDuration()))
+        .map(mapper::map)
         .collect(Collectors.toList());
   }
 
   @GetMapping(path = "/{id}")
-  public Workout getById(@PathVariable("id") UUID id) {
+  public WorkoutResponse getById(@PathVariable("id") UUID id) {
+
     return workouts.stream()
         .filter(element -> element.getId() == id)
         .findFirst()
+        .map(mapper::map)
         .orElseThrow(() -> new NoSuchElementException("Workout with ID = " + id + " not found"));
   }
 
@@ -51,7 +57,8 @@ public class WorkoutController {
 
 
   @DeleteMapping(path = "/{id}")
-  public boolean deleteWorkout(@PathVariable("id") UUID id) {
-    return workouts.removeIf(element -> element.getId() == id);
+  @ResponseStatus(code = HttpStatus.NO_CONTENT)
+  public void deleteWorkout(@PathVariable("id") UUID id) {
+    workouts.removeIf(element -> element.getId() == id);
   }
 }
