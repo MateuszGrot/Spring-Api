@@ -1,22 +1,26 @@
-package pl.mateuszgrot.workoutapp;
+package pl.mateuszgrot.workoutapp.adapter.in;
 
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 
 @Getter
-@Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class DurationDto {
+@AllArgsConstructor
+
+public class CreateWorkoutRequest {
+
+  @NotEmpty
+  private String name;
 
   @NotNull
-  private Long amount;
-  @NotEmpty
-  private String unit;
+  @Valid
+  private DurationDto duration;
+
 
 }
+

@@ -1,4 +1,4 @@
-package pl.mateuszgrot.workoutapp;
+package pl.mateuszgrot.workoutapp.infrastructure;
 
 import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
@@ -11,6 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
+import pl.mateuszgrot.workoutapp.adapter.in.CreateWorkoutRequest;
+import pl.mateuszgrot.workoutapp.adapter.out.UuidWrapper;
+import pl.mateuszgrot.workoutapp.adapter.out.WorkoutResponse;
+import pl.mateuszgrot.workoutapp.adapter.out.WorkoutResponseMapper;
+import pl.mateuszgrot.workoutapp.domain.Workout;
 
 @RestController
 @RequestMapping("/api/workouts")

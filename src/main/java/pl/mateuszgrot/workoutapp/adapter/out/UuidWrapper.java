@@ -1,4 +1,4 @@
-package pl.mateuszgrot.workoutapp;
+package pl.mateuszgrot.workoutapp.adapter.out;
 
 import java.util.UUID;
 import lombok.AllArgsConstructor;

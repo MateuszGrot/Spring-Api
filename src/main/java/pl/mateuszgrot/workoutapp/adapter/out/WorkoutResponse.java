@@ -1,18 +1,17 @@
-package pl.mateuszgrot.workoutapp;
+package pl.mateuszgrot.workoutapp.adapter.out;
 
+import java.time.Duration;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.Duration;
-import java.util.UUID;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
-public class Workout {
+public class WorkoutResponse {
 
   private UUID id;
   private String name;

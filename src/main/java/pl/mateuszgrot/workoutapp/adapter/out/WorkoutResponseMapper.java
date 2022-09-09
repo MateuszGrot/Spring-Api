@@ -1,6 +1,8 @@
-package pl.mateuszgrot.workoutapp;
+package pl.mateuszgrot.workoutapp.adapter.out;
 
 import org.springframework.stereotype.Component;
+import pl.mateuszgrot.workoutapp.adapter.out.WorkoutResponse;
+import pl.mateuszgrot.workoutapp.domain.Workout;
 
 @Component
 public class WorkoutResponseMapper {
