@@ -33,6 +33,7 @@ public class WorkoutController {
         .collect(Collectors.toList());
   }
 
+
   @GetMapping(path = "/{id}")
   public WorkoutResponse getById(@PathVariable("id") UUID id) {
 
