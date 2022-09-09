@@ -14,11 +14,7 @@ import java.util.UUID;
 @Getter
 public class Workout {
 
-<<<<<<< HEAD
-  private UUID uuid = UUID.randomUUID();
-=======
   private UUID id;
->>>>>>> improvements
   private String name;
   private Duration duration;
 
