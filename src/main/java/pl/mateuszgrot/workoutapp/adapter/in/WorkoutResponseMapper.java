@@ -1,7 +1,7 @@
-package pl.mateuszgrot.workoutapp.adapter.out;
+package pl.mateuszgrot.workoutapp.adapter.in;
 
 import org.springframework.stereotype.Component;
-import pl.mateuszgrot.workoutapp.adapter.out.WorkoutResponse;
+import pl.mateuszgrot.workoutapp.adapter.in.WorkoutResponse;
 import pl.mateuszgrot.workoutapp.domain.Workout;
 
 @Component

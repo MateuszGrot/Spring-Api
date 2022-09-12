@@ -1,4 +1,4 @@
-package pl.mateuszgrot.workoutapp.adapter.in;
+package pl.mateuszgrot.workoutapp.adapter;
 
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;

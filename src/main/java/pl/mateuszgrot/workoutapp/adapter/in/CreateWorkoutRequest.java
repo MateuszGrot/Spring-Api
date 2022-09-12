@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
+import pl.mateuszgrot.workoutapp.adapter.DurationDto;
 
 @Getter
 @NoArgsConstructor
