@@ -1,4 +1,4 @@
-package pl.mateuszgrot.workoutapp.adapter.out;
+package pl.mateuszgrot.workoutapp.adapter.in;
 
 import java.time.Duration;
 import java.util.UUID;
