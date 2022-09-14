@@ -1,14 +1,14 @@
 package pl.mateuszgrot.workoutapp.domain;
 
-import javax.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.Duration;
 import java.util.UUID;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,9 +17,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Workout {
 
-  @Id
-  private UUID id;
-  private String name;
-  private Duration duration;
+    @Id
+    private UUID id;
+    private String name;
+    private Duration duration;
 
 }
