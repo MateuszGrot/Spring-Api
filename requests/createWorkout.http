@@ -1,0 +1,10 @@
+POST http://localhost:8080/api/workouts
+Content-Type: application/json
+
+{
+  "name": "Wege Ryś",
+  "duration": {
+    "amount": "10",
+    "unit": "MINUTES"
+  }
+}
