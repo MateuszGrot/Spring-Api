@@ -11,11 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import pl.mateuszgrot.workoutapp.domain.Workout;
+import pl.mateuszgrot.workoutapp.domain.CreateWorkoutHandler;
 import pl.mateuszgrot.workoutapp.infrastructure.db.WorkoutRepository;
 
-import java.time.Duration;
-import java.time.temporal.ChronoUnit;
+
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
@@ -28,12 +27,13 @@ public class WorkoutController {
 
     private final WorkoutResponseMapper mapper;
     private final WorkoutRepository workoutRepository;
+    private final CreateWorkoutHandler createWorkoutHandler;
 
     @GetMapping("/")
     public List<WorkoutResponse> getAll() {
         return workoutRepository.findAll().stream()
-                .map(mapper::map)
-                .collect(Collectors.toList());
+            .map(mapper::map)
+            .collect(Collectors.toList());
     }
 
 
@@ -41,25 +41,16 @@ public class WorkoutController {
     public WorkoutResponse getById(@PathVariable("id") UUID id) {
 
         return workoutRepository.findById(id)
-                .map(mapper::map)
-                .orElseThrow(() -> new NoSuchElementException("Workout with ID = " + id + " not found"));
+            .map(mapper::map)
+            .orElseThrow(
+                () -> new NoSuchElementException("Workout with ID = " + id + " not found"));
     }
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public UuidWrapper addWorkout(@RequestBody @Validated CreateWorkoutRequest request) {
         final UUID id = UUID.randomUUID();
-
-        final Workout workout = new Workout(
-                id,
-                request.getName(),
-                Duration.of(
-                        request.getDuration().getAmount(),
-                        ChronoUnit.valueOf(request.getDuration().getUnit())
-                )
-        );
-
-        workoutRepository.save(workout);
+        createWorkoutHandler.create(id, request);
 
         return UuidWrapper.of(id);
     }

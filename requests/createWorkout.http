@@ -8,3 +8,7 @@ Content-Type: application/json
     "unit": "MINUTES"
   }
 }
+
+###
+
+GET http://localhost:8080/api/workouts/
