@@ -13,16 +13,14 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.testcontainers.containers.MongoDBContainer;
-import org.testcontainers.utility.DockerImageName;
+import org.springframework.test.context.ContextConfiguration;
 import pl.mateuszgrot.workoutapp.adapter.DurationDto;
 import pl.mateuszgrot.workoutapp.adapter.in.CreateWorkoutRequest;
 import pl.mateuszgrot.workoutapp.infrastructure.db.WorkoutRepository;
 
 @ExtendWith(MockitoExtension.class)
+@ContextConfiguration(initializers = {MongoTestContainerInitializer.class})
 class CreateWorkoutHandlerTest {
-
-    final MongoDBContainer mongoDBContainer = new MongoDBContainer(DockerImageName.parse("mongo:4.0.10"));
 
     private CreateWorkoutHandler handler;
     @Mock
@@ -35,22 +33,22 @@ class CreateWorkoutHandlerTest {
 
     @Test
     @DisplayName("Dupa")
-
     void shouldCreateWorkout_whenRequestIsOk() {
-        mongoDBContainer.start();
+
         //given
         final UUID id = UUID.randomUUID();
-        final CreateWorkoutRequest request = new CreateWorkoutRequest("Katarzyna", new DurationDto(5L,"SECONDS"));
+        final CreateWorkoutRequest request = new CreateWorkoutRequest("Katarzyna",
+            new DurationDto(5L, "SECONDS"));
 
         //when
-        handler.create(id,request);
+        handler.create(id, request);
 
         //then
         ArgumentCaptor<Workout> captor = ArgumentCaptor.forClass(Workout.class);
         verify(repository).save(captor.capture());
-        assertEquals(id,captor.getValue().getId());
-        assertEquals("Katarzyna",captor.getValue().getName());
-        assertEquals(Duration.of(5L, ChronoUnit.SECONDS),captor.getValue().getDuration());
+        assertEquals(id, captor.getValue().getId());
+        assertEquals("Katarzyna", captor.getValue().getName());
+        assertEquals(Duration.of(5L, ChronoUnit.SECONDS), captor.getValue().getDuration());
 
     }
 
