@@ -20,6 +20,7 @@ import pl.mateuszgrot.workoutapp.infrastructure.db.WorkoutRepository;
 
 @ExtendWith(MockitoExtension.class)
 @ContextConfiguration(initializers = {MongoTestContainerInitializer.class})
+
 class CreateWorkoutHandlerTest {
 
     private CreateWorkoutHandler handler;
